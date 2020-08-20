@@ -1,0 +1,10 @@
+/*
+
+# Files to not ignore
+!/.gitignore
+!/.zshrc
+
+# Folder to not ignore
+!/.scripts/
+!/.local/
+!/.config/

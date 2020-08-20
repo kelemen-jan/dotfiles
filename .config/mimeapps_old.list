@@ -1,0 +1,9 @@
+[Added Associations]
+text/plain=nvim.desktop;userapp-"st -e 'nvim %F'"-JPKBP0.desktop;userapp-"st -e 'nvim %F'"-XM62O0.desktop;
+x-scheme-handler/http=exo-web-browser.desktop;
+x-scheme-handler/https=exo-web-browser.desktop;
+
+[Default Applications]
+text/plain=userapp-"st -e 'nvim %F'"-XM62O0.desktop
+
+[Removed Associations]

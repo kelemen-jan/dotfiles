@@ -1,0 +1,50 @@
+#!/bin/bash
+
+print_brightness(){
+	printf "%s %.0f%s" S: $(light -G) %
+}
+
+print_mem(){
+	printf "%s %s" $(($(grep -m1 'MemAvailable:' /proc/meminfo | awk '{print $2}') / 1024)) MB
+}
+
+print_bat(){
+	bat=$(cat /sys/class/power_supply/BAT*/capacity)
+	printf "%s %s" B: $([[ $bat = "" ]] && echo Ø || echo $bat%)
+}
+
+print_date(){
+	date "+%a %m-%d %I:%M %p"
+}
+
+print_wifi(){
+	wifi=$(nmcli -t -f NAME connection show --active)
+	printf "%s" $([[ $wifi == "" ]] && echo Ø || echo $wifi) 
+}
+
+print_volume(){
+	vol=$(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }')
+	if [[ $(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $4 }') == "off" ]]
+	then
+		printf "%s %s %s" V: Ø $vol
+	else
+		printf "%s %s" V: $vol	
+	fi
+}
+
+print_mike(){
+	mike=$(amixer sget Capture | grep 'Right:' | awk -F'[][]' '{ print $2 }')
+	if [[ $(amixer sget Capture | grep 'Right:' | awk -F'[][]' '{ print $4 }') == "off" ]]
+	then
+		printf "%s %s %s" M: Ø $mike 
+	else
+		printf "%s %s" M: $mike
+	fi
+}
+
+print_layout(){
+	[[ $(xset -q | grep -A 0 'LED' | cut -c59-67) == 00000000 ]] && printf "%s" EN || printf "%s" SK 
+}
+
+
+xsetroot -name " $(print_mem) | $(print_date) | $(print_wifi) | $(print_brightness) | $(print_bat) | $(print_volume) | $(print_mike) | $(print_layout) "

@@ -1,0 +1,33 @@
+super + shift + Return
+	st
+
+XF86Audio{Raise,Lower}Volume
+	amixer set Master 5%{+,-}; bash ~/.scripts/dwmBar 
+XF86AudioMute
+	amixer set Master toggle; bash ~/.scripts/dwmBar 
+XF86AudioMicMute
+	amixer set Capture toggle; bash ~/.scripts/dwmBar 
+
+
+super + w
+	chromium
+
+super + bracketright
+	light -A 10; ~/.scripts/dwmBar
+super + bracketleft
+	light -U 10; ~/.scripts/dwmBar
+
+super + e
+	thunar
+
+super + a
+	rofi -modi drun,run -show drun -show-icons -icon-theme Papirus
+
+super + space
+	bash ~/.scripts/dwmBar
+
+super + n
+	systemctl suspend
+
+super + c
+	code
