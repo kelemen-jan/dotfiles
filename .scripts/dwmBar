@@ -24,8 +24,7 @@ print_wifi(){
 
 print_volume(){
 	vol=$(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }')
-	if [[ $(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $4 }') == "off" ]]
-	then
+	if [[ $(amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $4 }') == "off" ]]; then
 		printf "%s %s %s" V: Ø $vol
 	else
 		printf "%s %s" V: $vol	
@@ -34,8 +33,7 @@ print_volume(){
 
 print_mike(){
 	mike=$(amixer sget Capture | grep 'Right:' | awk -F'[][]' '{ print $2 }')
-	if [[ $(amixer sget Capture | grep 'Right:' | awk -F'[][]' '{ print $4 }') == "off" ]]
-	then
+	if [[ $(amixer sget Capture | grep 'Right:' | awk -F'[][]' '{ print $4 }') == "off" ]]; then
 		printf "%s %s %s" M: Ø $mike 
 	else
 		printf "%s %s" M: $mike
